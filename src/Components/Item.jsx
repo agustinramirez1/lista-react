@@ -1,24 +1,47 @@
-import React from 'react'
+import React, { useState } from 'react'
+import SubElements from './SubElements'
 
-const Item =({item, index, onClick}) => {
-    const {element, subElements, active} = item
-    
-  return (
-    <li >
-       <button className='btn ' onClick={onClick}>{element}{subElements.length > 0 && (<span className='bi bi-caret-right'>  </span>)}</button> 
-        { (subElements && active == true) && (
-            <ul>
-                {subElements.map((item, index )=>
-                    <li key={index}>
-                        {item}
-                    </li>
-                    )}
-            </ul>
-        )
+const Item = ({ index, item, indiceActivo, setIndiceActivo }) => {
+    const { element, subElements } = item
+    const [subIndexActivo, setSubIndexActivo] = useState(null)
 
+    const active = (index == indiceActivo) ? true : false
+    const background = (active == true) ? 'bg-primary-subtle' : ''
+    const color = (active == true) ? 'text-primary' : ''
+    const clase = (subElements.length > 0) ? background : color
+
+    const handleClick = () => {
+        if (active == true) {
+            setIndiceActivo(null)
+            setSubIndexActivo(null)
+        } else {
+            setIndiceActivo(index)
         }
-    </li>
-  )
+    }
+
+    return (
+        <li >
+            <button className={'btn ' + clase} onClick={handleClick}>
+                {element}
+                {subElements.length > 0 && (<span className='bi bi-caret-right'></span>)}
+            </button>
+
+            {(subElements && active == true) && (
+                <ul>
+                    {subElements.map((item, index) =>
+                        <SubElements
+                            key={index}
+                            index={index}
+                            item={item}
+                            subIndexActivo={subIndexActivo}
+                            setSubIndexActivo={setSubIndexActivo} />
+                    )}
+                </ul>
+            )
+
+            }
+        </li>
+    )
 }
 
 export default Item

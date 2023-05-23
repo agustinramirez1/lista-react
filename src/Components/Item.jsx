@@ -1,21 +1,23 @@
 import React, { useState } from 'react'
 import SubElements from './SubElements'
 
-const Item = ({ index, item, indiceActivo, setIndiceActivo }) => {
-    const { element, subElements } = item
+//Item viene del padre que en este caso es List
+
+const Item = ({ index, item, indexActivo, setIndexActivo }) => {
+    const { element, subElements } = item  //Se descompone List por sus items que se trajo del mismo
     const [subIndexActivo, setSubIndexActivo] = useState(null)
 
-    const active = (index == indiceActivo) ? true : false
+    const active = (index == indexActivo) ? true : false
     const background = (active == true) ? 'bg-primary-subtle' : ''
     const color = (active == true) ? 'text-primary' : ''
     const clase = (subElements.length > 0) ? background : color
 
     const handleClick = () => {
         if (active == true) {
-            setIndiceActivo(null)
+            setIndexActivo(null)
             setSubIndexActivo(null)
         } else {
-            setIndiceActivo(index)
+            setIndexActivo(index)
         }
     }
 

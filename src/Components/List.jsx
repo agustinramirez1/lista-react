@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Item from './Item';
 
 
-
 function List() {
     let list = [
         {
@@ -40,8 +39,7 @@ function List() {
     ]
 
     
-    const [indiceActivo, setIndiceActivo] = useState(null)
-
+    const [indexActivo, setIndexActivo] = useState(null)
     
     return (
         <ul>
@@ -50,8 +48,8 @@ function List() {
                 key={index} 
                 index={index} 
                 item={item} 
-                indiceActivo={indiceActivo}
-                setIndiceActivo={setIndiceActivo}
+                indexActivo={indexActivo}
+                setIndexActivo={setIndexActivo}
                  />)
             }
         </ul>
